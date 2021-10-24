@@ -2,16 +2,24 @@ import './App.css';
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import Stack from '@mui/material/Stack'
-
-
+import Stack from '@mui/material/Stack';
+import { calculate } from './services/calculator';
 
 function App() {
+  const results = {
+    equal: '',
+    lessThan: '',
+    lessThanOrEqual: '',
+    greaterThan: '',
+    greaterThanOrEqual: ''
+  }
+
   const [state, setState] = useState({
     populationSize: '',
     populationSuccesses: '',
     sampleSize: '',
-    sampleSuccesses: ''
+    sampleSuccesses: '',
+    results: results
   })
 
   const handleFormChange = (event) => {
@@ -22,8 +30,9 @@ function App() {
     });
   }
 
-  const calculate = () => {
-    console.log('population size = ', state.populationSize)
+  const calculateResult = () => {
+    state.results = calculate(state);
+    console.log("equal prob = ", state.results.equal);
   }
 
   return (
@@ -67,7 +76,7 @@ function App() {
           />
           <Button
             variant="contained"
-            onClick={calculate}
+            onClick={calculateResult}
           >
             Calculate
           </Button>
