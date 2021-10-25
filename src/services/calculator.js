@@ -12,24 +12,30 @@ export const calculate = (state) => {
     }
     probabilities.set(i, hypergeometricProbability(updatedState))
   }
-  // return {
-  //   equal: probabilities.get(this.sampleSuccesses) * 100,
-  //   lessThan: this.hyperLessThan(),
-  //   lessThanOrEqual: this.hyperLessThanOrEqual(),
-  //   greaterThan: this.hyperGreaterThan(),
-  //   greaterThanOrEqual: this.hyperGreaterThanOrEqual()
-  // }
+
   return {
-    equal: hypergeometricProbability(state),
-    lessThan: hyperLessThan(state),
-    lessThanOrEqual: hyperLessThanOrEqual(state),
-    greaterThan: hyperGreaterThan(state),
-    greaterThanOrEqual: hyperGreaterThanOrEqual(state),
+    equal: probabilities.get(state.sampleSuccesses).toFixed(6),
+    lessThan: lessThan(state),
+    lessThanOrEqual: lessThanOrEqual(state),
+    greaterThan: greaterThan(state),
+    greaterThanOrEqual: greaterThanOrEqual(state),
   }
 }
 
 const hypergeometricProbability = (state) => {
-  console.log("state => ", state)
+    /*
+      from https://stattrek.com/probability-distributions/hypergeometric.aspx?tutorial=prob
+      Suppose a population consists of N items, k of which are successes. 
+      And a random sample drawn from that population consists of n items, x of which are successes.
+      Then the hypergeometric probability is:
+      h(x; N, n, k) = [ kCx ] [ (N-k)C(n-x) ] / [ NCn ]
+      h(x; N, n, k) = sample * extra / population
+
+      N = PopulationSize
+      k = PopulationSuccesses
+      n = SampleSize
+      x = SampleSuccesses
+    */
   const kCx = combinations(state.populationSuccesses, state.sampleSuccesses);
   const NkCnx = combinations((state.populationSize - state.populationSuccesses), (state.sampleSize - state.sampleSuccesses));
   const NCn = combinations(state.populationSize, state.sampleSize);
@@ -37,34 +43,26 @@ const hypergeometricProbability = (state) => {
   return (kCx * NkCnx) / NCn;
 }
 
-const hyperLessThan = (state) => {
-  let result = 0;
-  for (let i = 0; i < state.sampleSuccesses; i++ ) {
-    result += probabilities.get(i);
+const cumulativeProbability = (start, end) => {
+  let result = 0
+  for (let i = start; i <= end; i++) {
+    result += probabilities.get(i)
   }
-  return result * 100;
+  return result.toFixed(6)
 }
 
-const hyperLessThanOrEqual = (state) => {
-  let result = 0;
-  for (let i = 0; i <= state.sampleSuccesses; i++ ) {
-    result += probabilities.get(i);
-  }
-  return result * 100;
+const lessThan = (state) => {
+  return cumulativeProbability(0, state.sampleSuccesses - 1)
 }
 
-const hyperGreaterThan = (state) => {
-  let result = 0;
-  for (let i = (state.sampleSuccesses + 1); i <= state.sampleSize; i++ ) {
-    result += probabilities.get(i);
-  }
-  return result * 100;
+const lessThanOrEqual = (state) => {
+  return cumulativeProbability(0, state.sampleSuccesses)
 }
 
-const hyperGreaterThanOrEqual = (state) => {
-  let result = 0;
-  for (let i = state.sampleSuccesses; i <= state.sampleSize; i++ ) {
-    result += probabilities.get(i);
-  }
-  return result * 100;
+const greaterThan = (state) => {
+  return cumulativeProbability(state.sampleSuccesses + 1, state.sampleSize)
+}
+
+const greaterThanOrEqual = (state) => {
+  return cumulativeProbability(state.sampleSuccesses, state.sampleSize)
 }

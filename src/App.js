@@ -112,8 +112,40 @@ function App() {
               value={state.results.greaterThanOrEqual}
             /> */}
             <TextField
-              label={`Cumulative Probability: P(X ≥ x)`}
+              label={`Hypergeometric Probability: P(X = ${state.calculatedSampleSuccesses})`}
               defaultValue={state.results.equal}
+              InputProps={{
+                readOnly: true,
+              }}
+              variant="standard"
+            />
+            <TextField
+              label={`Cumulative Probability: P(X < ${state.calculatedSampleSuccesses})`}
+              defaultValue={state.results.lessThan}
+              InputProps={{
+                readOnly: true,
+              }}
+              variant="standard"
+            />
+            <TextField
+              label={`Cumulative Probability: P(X ≤ ${state.calculatedSampleSuccesses})`}
+              defaultValue={state.results.lessThanOrEqual}
+              InputProps={{
+                readOnly: true,
+              }}
+              variant="standard"
+            />
+            <TextField
+              label={`Cumulative Probability: P(X > ${state.calculatedSampleSuccesses})`}
+              defaultValue={state.results.greaterThan}
+              InputProps={{
+                readOnly: true,
+              }}
+              variant="standard"
+            />
+            <TextField
+              label={`Cumulative Probability: P(X ≥ ${state.calculatedSampleSuccesses})`}
+              defaultValue={state.results.greaterThanOrEqual}
               InputProps={{
                 readOnly: true,
               }}
