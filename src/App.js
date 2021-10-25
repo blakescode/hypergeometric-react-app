@@ -3,8 +3,9 @@ import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
+import Tooltip from '@mui/material/Tooltip'
 import { calculate } from './services/calculator';
-import Probability from './components/Probability';
+import CodeIcon from '@mui/icons-material/Code';
 
 function App() {
   const results = {
@@ -43,12 +44,51 @@ function App() {
     })
   }
 
+  const populateExampleData = () => {
+    setState({
+      ...state,
+      populationSize: 52,
+      populationSuccesses: 13,
+      sampleSize: 7,
+      sampleSuccesses: 5
+    })
+  }
+
   return (
     <div className="App">
       <div className="Header">
-        <h1>Hypergeometric Calculator</h1>
+        <h1>
+          Hypergeometric Calculator
+          <Tooltip title="View Code on Github">
+            <Button 
+              variant="link"
+              color="default"
+              className="header-button"
+              startIcon={<CodeIcon />}
+              href="https://github.com/blakescode/hypergeometric-react-app"
+              target="_blank"
+            >
+            </Button>
+          </Tooltip>
+        </h1>
       </div>
       <div className="Form">
+        <Stack spacing={2} className='stack-example'> 
+          <p className="example">
+            <b>How to use the Hypergeometric Calculator:</b><br/>
+            <br/>
+            Suppose you have a <b>52</b>-card deck of playing cards.<br/>
+            There are <b>13</b> cards of each suit in the deck.<br/>
+            Given an opening hand of <b>7</b> cards<br/>
+            What are the odds that <b>5</b> of them are the same suit?
+          </p>
+          <Button
+            variant="outlined"
+            onClick={populateExampleData}
+          >
+            Populate Example Data
+          </Button>
+        </Stack>
         <Stack spacing={2} className='stack-form'>
           <TextField 
             id="populationSize"
@@ -91,26 +131,6 @@ function App() {
         </Stack>
         { state.hasBeenCalculated &&
           <Stack spacing={2} className='stack-results'>
-            {/* <Probability 
-              label={`Hypergeometric Probability: P(X = ${state.calculatedSampleSuccesses})`.toString()}
-              value={state.results.equal}
-            />
-            <Probability 
-              label={`Cumulative Probability: P(X < ${state.calculatedSampleSuccesses})`.toString()}
-              value={state.results.lessThan}
-            />
-            <Probability 
-              label={`Cumulative Probability: P(X ≤ ${state.calculatedSampleSuccesses})`.toString()}
-              value={state.results.lessThanOrEqual}
-            />
-            <Probability 
-              label={`Cumulative Probability: P(X > ${state.calculatedSampleSuccesses})`.toString()}
-              value={state.results.greaterThan}
-            />
-            <Probability 
-              label={`Cumulative Probability: P(X ≥ ${state.calculatedSampleSuccesses})`.toString()}
-              value={state.results.greaterThanOrEqual}
-            /> */}
             <TextField
               label={`Hypergeometric Probability: P(X = ${state.calculatedSampleSuccesses})`}
               defaultValue={state.results.equal}

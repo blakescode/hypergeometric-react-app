@@ -12,14 +12,19 @@
   text-align: center;
   display: flex;
   justify-content: center;
-  margin-top: 2vh;
+  margin-top: 5vh;
+}
+
+.stack-example {
+  min-width: 20vw;
 }
 
 .stack-form {
-  min-width: 40vw;
+  margin-left: 5vw;
+  min-width: 30vw;
 }
 
 .stack-results {
-  margin-left: 2vw;
+  margin-left: 5vw;
   min-width: 20vw;
 }
