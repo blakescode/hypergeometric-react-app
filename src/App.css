@@ -12,19 +12,26 @@
   text-align: center;
   display: flex;
   justify-content: center;
-  margin-top: 5vh;
+  padding: 30px 30px 60px 30px;
+}
+
+.example-button {
+  max-width: 300px;
 }
 
 .stack-example {
-  min-width: 20vw;
-}
-
-.stack-form {
-  margin-left: 5vw;
-  min-width: 30vw;
+  align-items: center;
 }
 
 .stack-results {
-  margin-left: 5vw;
   min-width: 20vw;
+}
+
+@media screen and (max-width: 992px) {
+  .stack-example {
+    margin-top: -15px;
+  }
+  .header-button {
+    display: none !important;
+  }
 }
