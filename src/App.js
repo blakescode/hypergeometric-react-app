@@ -133,7 +133,7 @@ function App() {
           <Stack spacing={2} className='stack-results'>
             <TextField
               label={`Hypergeometric Probability: P(X = ${state.calculatedSampleSuccesses})`}
-              defaultValue={state.results.equal}
+              value={state.results.equal}
               InputProps={{
                 readOnly: true,
               }}
@@ -141,7 +141,7 @@ function App() {
             />
             <TextField
               label={`Cumulative Probability: P(X < ${state.calculatedSampleSuccesses})`}
-              defaultValue={state.results.lessThan}
+              value={state.results.lessThan}
               InputProps={{
                 readOnly: true,
               }}
@@ -149,7 +149,7 @@ function App() {
             />
             <TextField
               label={`Cumulative Probability: P(X ≤ ${state.calculatedSampleSuccesses})`}
-              defaultValue={state.results.lessThanOrEqual}
+              value={state.results.lessThanOrEqual}
               InputProps={{
                 readOnly: true,
               }}
@@ -157,7 +157,7 @@ function App() {
             />
             <TextField
               label={`Cumulative Probability: P(X > ${state.calculatedSampleSuccesses})`}
-              defaultValue={state.results.greaterThan}
+              value={state.results.greaterThan}
               InputProps={{
                 readOnly: true,
               }}
@@ -165,7 +165,7 @@ function App() {
             />
             <TextField
               label={`Cumulative Probability: P(X ≥ ${state.calculatedSampleSuccesses})`}
-              defaultValue={state.results.greaterThanOrEqual}
+              value={state.results.greaterThanOrEqual}
               InputProps={{
                 readOnly: true,
               }}
