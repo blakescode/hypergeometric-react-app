@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import { calculate } from './services/calculator';
+import Probability from './components/Probability';
 
 function App() {
   const results = {
@@ -19,20 +20,27 @@ function App() {
     populationSuccesses: '',
     sampleSize: '',
     sampleSuccesses: '',
+    calculatedSampleSuccesses: '',
+    hasBeenCalculated: false,
     results: results
   })
 
   const handleFormChange = (event) => {
-    const updatedValue = event.target.value;
+    const updatedValue = parseInt(event.target.value)
     setState({
       ...state,
-      [event.target.name]: updatedValue
-    });
+      [event.target.name]: isNaN(updatedValue) ? '' : updatedValue
+    })
   }
 
   const calculateResult = () => {
-    state.results = calculate(state);
-    console.log("equal prob = ", state.results.equal);
+    const results = calculate(state)
+    setState({
+      ...state,
+      results: results,
+      calculatedSampleSuccesses: state.sampleSuccesses,
+      hasBeenCalculated: true,
+    })
   }
 
   return (
@@ -81,6 +89,38 @@ function App() {
             Calculate
           </Button>
         </Stack>
+        { state.hasBeenCalculated &&
+          <Stack spacing={2} className='stack-results'>
+            {/* <Probability 
+              label={`Hypergeometric Probability: P(X = ${state.calculatedSampleSuccesses})`.toString()}
+              value={state.results.equal}
+            />
+            <Probability 
+              label={`Cumulative Probability: P(X < ${state.calculatedSampleSuccesses})`.toString()}
+              value={state.results.lessThan}
+            />
+            <Probability 
+              label={`Cumulative Probability: P(X ≤ ${state.calculatedSampleSuccesses})`.toString()}
+              value={state.results.lessThanOrEqual}
+            />
+            <Probability 
+              label={`Cumulative Probability: P(X > ${state.calculatedSampleSuccesses})`.toString()}
+              value={state.results.greaterThan}
+            />
+            <Probability 
+              label={`Cumulative Probability: P(X ≥ ${state.calculatedSampleSuccesses})`.toString()}
+              value={state.results.greaterThanOrEqual}
+            /> */}
+            <TextField
+              label={`Cumulative Probability: P(X ≥ x)`}
+              defaultValue={state.results.equal}
+              InputProps={{
+                readOnly: true,
+              }}
+              variant="standard"
+            />
+          </Stack>
+        }
       </div>
     </div>
   );
