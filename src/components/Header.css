@@ -1,0 +1,15 @@
+.Header {
+  background-color: rgb(51, 51, 51);
+  height: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+@media screen and (max-width: 992px) {
+  .header-button {
+    display: none !important;
+  }
+}

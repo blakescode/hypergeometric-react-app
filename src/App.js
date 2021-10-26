@@ -1,12 +1,11 @@
 import './App.css';
 import React, { useState } from 'react';
+import Header from './components/Header';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
-import Tooltip from '@mui/material/Tooltip'
 import { calculate } from './services/calculator';
-import CodeIcon from '@mui/icons-material/Code';
 
 function App() {
   const results = {
@@ -57,22 +56,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className="Header">
-        <h1>
-          Hypergeometric Calculator
-          <Tooltip title="View Code on Github">
-            <Button 
-              variant="link"
-              color="default"
-              className="header-button"
-              startIcon={<CodeIcon />}
-              href="https://github.com/blakescode/hypergeometric-react-app"
-              target="_blank"
-            >
-            </Button>
-          </Tooltip>
-        </h1>
-      </div>
+      <Header />
       <div className="Form">
         <Grid
           container 
@@ -80,9 +64,9 @@ function App() {
           justifyContent="center"
           spacing={6}
         >
-          <Grid item xs={12} sm={12} md>
+          <Grid item xs={12} sm={12} md={4}>
             <Stack spacing={2} className='stack-example'> 
-              <p className="example">
+              <p>
                 <b>How to use the Hypergeometric Calculator:</b><br/>
                 <br/>
                 Suppose you have a deck of <b>52</b> playing cards.<br/>
@@ -99,7 +83,7 @@ function App() {
               </Button>
             </Stack>
           </Grid>
-          <Grid item xs={12} sm md>
+          <Grid item xs={12} sm md={4}>
             <Stack spacing={2} className='stack-form'>
               <TextField 
                 id="populationSize"
@@ -141,7 +125,7 @@ function App() {
               </Button>
             </Stack>
           </Grid>
-          <Grid item xs={12} sm md="auto">
+          <Grid item xs={12} sm md={4}>
             { state.hasBeenCalculated &&
               <Stack spacing={2} className='stack-results'>
                 <TextField
