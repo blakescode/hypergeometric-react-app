@@ -2,9 +2,8 @@ import './App.css';
 import React, { useState } from 'react';
 import StackExample from './components/StackExample';
 import StackForm from './components/StackForm';
+import StackResults from './components/StackResults';
 import Header from './components/Header';
-import TextField from '@mui/material/TextField';
-import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
 import { calculate } from './services/calculator';
 
@@ -80,48 +79,10 @@ function App() {
           </Grid>
           <Grid item xs={12} sm md={4}>
             { state.hasBeenCalculated &&
-              <Stack spacing={2} className='stack-results'>
-                <TextField
-                  label={`Hypergeometric Probability: P(X = ${state.calculatedSampleSuccesses})`}
-                  value={state.results.equal}
-                  InputProps={{
-                    readOnly: true,
-                  }}
-                  variant="standard"
-                />
-                <TextField
-                  label={`Cumulative Probability: P(X < ${state.calculatedSampleSuccesses})`}
-                  value={state.results.lessThan}
-                  InputProps={{
-                    readOnly: true,
-                  }}
-                  variant="standard"
-                />
-                <TextField
-                  label={`Cumulative Probability: P(X ≤ ${state.calculatedSampleSuccesses})`}
-                  value={state.results.lessThanOrEqual}
-                  InputProps={{
-                    readOnly: true,
-                  }}
-                  variant="standard"
-                />
-                <TextField
-                  label={`Cumulative Probability: P(X > ${state.calculatedSampleSuccesses})`}
-                  value={state.results.greaterThan}
-                  InputProps={{
-                    readOnly: true,
-                  }}
-                  variant="standard"
-                />
-                <TextField
-                  label={`Cumulative Probability: P(X ≥ ${state.calculatedSampleSuccesses})`}
-                  value={state.results.greaterThanOrEqual}
-                  InputProps={{
-                    readOnly: true,
-                  }}
-                  variant="standard"
-                />
-              </Stack>
+              <StackResults
+                calculatedSampleSuccesses={state.calculatedSampleSuccesses}
+                results={state.results}
+              />
             }
           </Grid>
         </Grid>
