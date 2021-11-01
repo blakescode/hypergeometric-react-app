@@ -1,8 +1,8 @@
 import React from 'react';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+import './StackExample.css';
+import { Button, Stack } from '@mui/material';
 
-const Example = (props) => {
+const StackExample = (props) => {
   return(
     <Stack spacing={2} className='stack-example'> 
       <p>
@@ -24,4 +24,4 @@ const Example = (props) => {
   )
 }
 
-export default Example
+export default StackExample

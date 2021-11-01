@@ -1,8 +1,8 @@
 import './App.css';
 import React, { useState } from 'react';
-import Example from './components/Example';
+import StackExample from './components/StackExample';
+import StackForm from './components/StackForm';
 import Header from './components/Header';
-import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
@@ -66,49 +66,17 @@ function App() {
           spacing={6}
         >
           <Grid item xs={12} sm={12} md={4}>
-            <Example populateExampleData={() => populateExampleData()} />
+            <StackExample populateExampleData={() => populateExampleData()} />
           </Grid>
           <Grid item xs={12} sm md={4}>
-            <Stack spacing={2} className='stack-form'>
-              <TextField 
-                id="populationSize"
-                name="populationSize"
-                label="Population Size"
-                variant="outlined"
-                value={state.populationSize}
-                onChange={handleFormChange}
-              />
-              <TextField 
-                id="populationSuccesses"
-                name="populationSuccesses"
-                label="Population Successes"
-                variant="outlined"
-                value={state.populationSuccesses}
-                onChange={handleFormChange}
-              />
-              <TextField 
-                id="sampleSize"
-                name="sampleSize"
-                label="Sample Size"
-                variant="outlined"
-                value={state.sampleSize}
-                onChange={handleFormChange}
-              />
-              <TextField 
-                id="sampleSuccesses"
-                name="sampleSuccesses"
-                label="Sample Successes"
-                variant="outlined"
-                value={state.sampleSuccesses}
-                onChange={handleFormChange}
-              />
-              <Button
-                variant="contained"
-                onClick={calculateResult}
-              >
-                Calculate
-              </Button>
-            </Stack>
+            <StackForm 
+              populationSize={state.populationSize}
+              populationSuccesses={state.populationSuccesses}
+              sampleSize={state.sampleSize}
+              sampleSuccesses={state.sampleSuccesses}
+              handleFormChange={handleFormChange}
+              calculateResult={() => calculateResult()}
+            />
           </Grid>
           <Grid item xs={12} sm md={4}>
             { state.hasBeenCalculated &&

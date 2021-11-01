@@ -1,0 +1,13 @@
+.stack-example {
+  align-items: center;
+}
+
+.example-button {
+  max-width: 300px;
+}
+
+@media screen and (max-width: 992px) {
+  .stack-example {
+    margin-top: -15px;
+  }
+}
